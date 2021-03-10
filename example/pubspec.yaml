@@ -29,7 +29,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
 
-  fa_flutter_core:
+  fa_dart_core:
     path: ../
 
 dev_dependencies:
