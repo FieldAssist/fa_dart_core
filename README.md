@@ -1,6 +1,6 @@
 # fa_dart_core [![codecov](https://codecov.io/gh/FieldAssist/fa_dart_core/branch/main/graph/badge.svg?token=0SJUKQDEC2)](https://codecov.io/gh/FieldAssist/fa_dart_core)
 
-Official FA Flutter core package.
+Official FA Dart core package.
 
 ## Getting Started
 
