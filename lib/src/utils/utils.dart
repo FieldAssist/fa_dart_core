@@ -7,7 +7,6 @@ bool checkIfListIsNotEmpty(List? list) {
 }
 
 bool ifContainsKeyAndNotEmpty(Map map, String key) {
-  assert(map != null && key != null);
   return map.containsKey(key) &&
       map[key] != null &&
       (map[key] as Map).isNotEmpty;

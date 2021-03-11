@@ -8,6 +8,6 @@ class MyException implements Exception {
 
   @override
   String toString() {
-    return message ?? 'NA';
+    return message;
   }
 }

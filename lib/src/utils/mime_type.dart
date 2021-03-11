@@ -3,14 +3,14 @@ String? mime(String fileName) {
   int lastDot = fileName.lastIndexOf('.', fileName.length - 1);
   if (lastDot != -1) {
     String extension = fileName.substring(lastDot + 1);
-    return _mimeMaps[extension?.toLowerCase()];
+    return _mimeMaps[extension.toLowerCase()];
   } else
     return null;
 }
 
 // get MIME type from extension (returns null if there is no such extension)
 String? mimeFromExtension(String extension) =>
-    _mimeMaps[extension?.toLowerCase()];
+    _mimeMaps[extension.toLowerCase()];
 
 // default MIME type mappings
 Map _mimeMaps = const {
