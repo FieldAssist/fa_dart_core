@@ -104,7 +104,7 @@ packages:
     description:
       path: "."
       ref: main
-      resolved-ref: "942fd137224a890c6079977e41f46b77690c7804"
+      resolved-ref: e80a4ea2624ac77c847bcd21f68542ed732ba87d
       url: "https://github.com/FieldAssist/fa_dart_logger.git"
     source: git
     version: "1.0.0"

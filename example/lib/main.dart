@@ -1,4 +1,4 @@
-import 'package:fa_dart_core/fa_dart_core.dart';
+import 'package:fa_dart_logger/fa_dart_logger.dart';
 import 'package:flutter/material.dart';
 
 void main() {
