@@ -13,7 +13,7 @@ String? mimeFromExtension(String extension) =>
     _mimeMaps[extension.toLowerCase()];
 
 // default MIME type mappings
-Map _mimeMaps = const {
+final _mimeMaps = <String, String>{
   '123': 'application/vnd.lotus-1-2-3',
   '3dml': 'text/vnd.in3d.3dml',
   '3ds': 'image/x-3ds',
