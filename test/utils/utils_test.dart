@@ -48,4 +48,30 @@ void main() {
       expect(result, true);
     });
   });
+
+  group('ifContainsKeyAndNotEmpty', () {
+    test('ifContainsKeyAndNotEmpty should return false when map is empty', () {
+      final map = <String, String>{};
+      expect(ifContainsKeyAndNotEmpty(map, 'abc'), false);
+    });
+
+    test('ifContainsKeyAndNotEmpty should return false when key value is null',
+        () {
+      final map = <String, String?>{'abc': null};
+      expect(ifContainsKeyAndNotEmpty(map, 'abc'), false);
+    });
+
+    test('ifContainsKeyAndNotEmpty should return false when key value is empty',
+        () {
+      final map = <String, String>{'abc': ''};
+      expect(ifContainsKeyAndNotEmpty(map, 'abc'), false);
+    });
+
+    test(
+        'ifContainsKeyAndNotEmpty should return true when key value is matched',
+        () {
+      final map = <String, String>{'abc': 'v1'};
+      expect(ifContainsKeyAndNotEmpty(map, 'abc'), true);
+    });
+  });
 }
