@@ -1,6 +1,3 @@
-import 'package:flutter/material.dart';
-
-@immutable
 class MyException implements Exception {
   const MyException(this.message);
 
