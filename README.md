@@ -38,3 +38,12 @@ logger.e(e,stacktrace); // Use StackTrace.current in case no stacktrace availabl
 ```
 logger.i("Api response: xyz");
 ```
+
+## DateTimeUtils
+Provides basic formatting for DateTime.
+usage:
+
+```
+DateTime time = DateTime.Now();
+DateTimeUtils.format(time);
+```
