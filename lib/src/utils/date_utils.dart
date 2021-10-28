@@ -8,7 +8,7 @@ class DateTimeUtils {
   static int FORMAT_ISO_8601 = 1;
   static const String FORMAT_dd_MMMM_yyyy = "dd MMMM yyyy";
   static const String FORMAT_dd_MMM_yyyy = "dd MMM yyyy";
-  static const String FORMAT_dd_MMM_yy = "dd MMM yyyy";
+  static const String FORMAT_dd_MMM_yy = "dd MMM yy";
   static String FORMAT_dd_MMM = "dd MMM";
   static String FORMAT_dd_MM_yyyy = "dd/MM/yyyy";
   static String FORMAT_dd_MM_yyyy_HH_MM_AM_PM = "dd/MM/yyyy hh:mm a";
@@ -140,9 +140,8 @@ class DateTimeUtils {
           parsePlaningDate(date),
         ),
       );
-    } catch (e, s) {
+    } catch (e) {
       print(e);
-      print(s);
       return int.tryParse(
         DateFormat(FORMAT_route_yyyyMMdd).format(
           parseIsoDate(date),
