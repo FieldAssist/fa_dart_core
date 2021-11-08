@@ -113,4 +113,19 @@ void main() {
       expect('TEST', 'TEST');
     });
   });
+
+  group('isSameDay', () {
+    test('This method should return true for same date as both the inputs.',
+        () {
+      final isSameDate = DateTime.now().isSameDate(DateTime.now());
+      expect(isSameDate, true);
+    });
+
+    test('This method should return false for different dates as input.', () {
+      final d1 = DateTime.now();
+      final d2 = d1.subtract(Duration(days: 200));
+      final isSameDate = d1.isSameDate(d2);
+      expect(isSameDate, false);
+    });
+  });
 }
