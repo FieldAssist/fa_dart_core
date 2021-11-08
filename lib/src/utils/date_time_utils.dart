@@ -110,13 +110,10 @@ class DateTimeUtils {
     var date = dateTime ?? DateTime.now();
     //Time zone may be null in dateTime hence get timezone by  datetime
     var duration = DateTime.now().timeZoneOffset;
-    if (duration.isNegative)
-      //TODO: convert duration to abs value instead of below params
-      return (date.toIso8601String() +
-          "-${duration.inHours.abs().toString().padLeft(2, '0')}:${(duration.inMinutes.abs() - (duration.inHours.abs() * 60)).toString().padLeft(2, '0')}");
-    else
-      return (date.toIso8601String() +
-          "+${duration.inHours.toString().padLeft(2, '0')}:${(duration.inMinutes - (duration.inHours * 60)).toString().padLeft(2, '0')}");
+
+    //TODO: convert duration to abs value instead of below params
+    return (date.toIso8601String() +
+        "${duration.isNegative ? '-' : '+'}${duration.inHours.abs().toString().padLeft(2, '0')}:${(duration.inMinutes.abs() - (duration.inHours.abs() * 60)).toString().padLeft(2, '0')}");
   }
 
   static DateTime parseIsoDate(String startTime) {

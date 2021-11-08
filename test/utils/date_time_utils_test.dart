@@ -125,7 +125,21 @@ void main() {
         actual,
         matches(
           RegExp(
-            r'[0-9]{4}-[0-9]{2}-[0-9]{2}T([0-9]{2}:){2}[0-9]{2}.[0-9]{3}[+|-][0-9]{2}:[0-9]{2}',
+            r'[0-9]{4}-[0-9]{2}-[0-9]{2}T([0-9]{2}:){2}[0-9]{2}.[0-9]+[+|-][0-9]{2}:[0-9]{2}',
+          ),
+        ),
+      );
+    });
+
+    test('should parse and return iso time string when dateTime not supplied',
+        () {
+      final actual = DateTimeUtils.getCurrentISOTimeString();
+      expect(actual, isA<String>());
+      expect(
+        actual,
+        matches(
+          RegExp(
+            r'[0-9]{4}-[0-9]{2}-[0-9]{2}T([0-9]{2}:){2}[0-9]{2}.[0-9]+[+|-][0-9]{2}:[0-9]{2}',
           ),
         ),
       );
