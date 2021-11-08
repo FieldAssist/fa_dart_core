@@ -48,6 +48,16 @@ void main() {
       }
     });
 
+    test('formatDateTime should throw exception if format not defined', () {
+      expect(
+        () => DateTimeUtils.formatDateTime(
+          dateTime: dateTime,
+          outputFormat: DateTimeFormat.FORMAT_UNKNOWN,
+        ),
+        throwsException,
+      );
+    });
+
     test('formatDSRDate should return the formatted date string', () {
       final dateString = "01/11/2021";
       final actual = DateTimeUtils.formatDSRDate(dateString);

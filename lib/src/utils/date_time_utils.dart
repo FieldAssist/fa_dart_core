@@ -26,6 +26,7 @@ enum DateTimeFormat {
   FORMAT_2_MM_dd_yyyy,
   FORMAT_3_dd_MM_yyyy,
   FORMAT_3_dd_MM_yyyy_HH_MM_AM_PM,
+  FORMAT_UNKNOWN,
 }
 
 extension DateTimeFormatExtension on DateTimeFormat {
@@ -69,7 +70,8 @@ extension DateTimeFormatExtension on DateTimeFormat {
         return "dd/MM/yyyy hh:mm a";
       default:
         throw Exception(
-            'Unimplemented $this in extension DateTimeFormatExtension');
+          'Unimplemented $this in extension DateTimeFormatExtension',
+        );
     }
   }
 }
@@ -77,13 +79,17 @@ extension DateTimeFormatExtension on DateTimeFormat {
 class DateTimeUtils {
   DateTimeUtils._();
 
-  static String formatDateTime(
-      {required DateTime dateTime, required DateTimeFormat outputFormat}) {
+  static String formatDateTime({
+    required DateTime dateTime,
+    required DateTimeFormat outputFormat,
+  }) {
     return DateFormat(outputFormat.value).format(dateTime);
   }
 
-  static DateTime parseDateTime(
-      {required String dateTime, required DateTimeFormat inputFormat}) {
+  static DateTime parseDateTime({
+    required String dateTime,
+    required DateTimeFormat inputFormat,
+  }) {
     return DateFormat(inputFormat.value).parse(dateTime);
   }
 
