@@ -77,7 +77,7 @@ extension DateTimeFormatExtension on DateTimeFormat {
 }
 
 class DateTimeUtils {
-  DateTimeUtils._();
+  DateTimeUtils._(); // coverage:ignore-line
 
   static String formatDateTime({
     required DateTime dateTime,
