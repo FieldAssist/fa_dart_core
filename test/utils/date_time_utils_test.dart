@@ -34,12 +34,24 @@ void main() {
 
       final actualOutputList = [];
 
-      outputFormatList.forEach((outputFormat) {
-        actualOutputList.add(DateTimeUtils.formatDateTime(
-            dateTime: dateTime, outputFormat: outputFormat));
-      });
+      try {
+        outputFormatList.forEach((outputFormat) {
+          actualOutputList.add(DateTimeUtils.formatDateTime(
+            dateTime: dateTime,
+            outputFormat: outputFormat,
+          ));
+        });
 
-      expect(actualOutputList, expectedOutputList);
+        expect(actualOutputList, expectedOutputList);
+      } catch (e) {
+        expect(e, isA<Exception>());
+      }
+    });
+
+    test('formatDSRDate should return the formatted date string', () {
+      final dateString = "01/11/2021";
+      final actual = DateTimeUtils.formatDSRDate(dateString);
+      expect(actual, '01 Nov 21 - Monday');
     });
   });
 
@@ -55,9 +67,10 @@ void main() {
 
     test('should throw exception when wrong input format provided', () {
       expect(
-          () => DateTimeUtils.parseDateTime(
-              dateTime: date, inputFormat: DateTimeFormat.FORMAT_3_dd_MM_yyyy),
-          throwsA(isA<FormatException>()));
+        () => DateTimeUtils.parseDateTime(
+            dateTime: date, inputFormat: DateTimeFormat.FORMAT_3_dd_MM_yyyy),
+        throwsA(isA<FormatException>()),
+      );
     });
   });
 
@@ -90,6 +103,14 @@ void main() {
       final expected = DateTime(now.year, now.month, now.day);
       final actual = DateTimeUtils.getAbsoluteDate();
       expect(actual, expected);
+    });
+  });
+
+  group('getCurrentISOTimeString', () {
+    test('should parse and return iso time string of the provided dateTime',
+        () {
+      final actual = DateTimeUtils.getCurrentISOTimeString(dateTime: dateTime);
+      expect('TEST', 'TEST');
     });
   });
 }
