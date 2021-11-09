@@ -26,6 +26,7 @@ enum DateTimeFormat {
   FORMAT_2_MM_dd_yyyy,
   FORMAT_3_dd_MM_yyyy,
   FORMAT_3_dd_MM_yyyy_HH_MM_AM_PM,
+  FORMAT_UNKNOWN,
 }
 
 extension DateTimeFormatExtension on DateTimeFormat {
@@ -69,21 +70,26 @@ extension DateTimeFormatExtension on DateTimeFormat {
         return "dd/MM/yyyy hh:mm a";
       default:
         throw Exception(
-            'Unimplemented $this in extension DateTimeFormatExtension');
+          'Unimplemented $this in extension DateTimeFormatExtension',
+        );
     }
   }
 }
 
 class DateTimeUtils {
-  DateTimeUtils._();
+  DateTimeUtils._(); // coverage:ignore-line
 
-  static String formatDateTime(
-      {required DateTime dateTime, required DateTimeFormat outputFormat}) {
+  static String formatDateTime({
+    required DateTime dateTime,
+    required DateTimeFormat outputFormat,
+  }) {
     return DateFormat(outputFormat.value).format(dateTime);
   }
 
-  static DateTime parseDateTime(
-      {required String dateTime, required DateTimeFormat inputFormat}) {
+  static DateTime parseDateTime({
+    required String dateTime,
+    required DateTimeFormat inputFormat,
+  }) {
     return DateFormat(inputFormat.value).parse(dateTime);
   }
 
@@ -104,13 +110,10 @@ class DateTimeUtils {
     var date = dateTime ?? DateTime.now();
     //Time zone may be null in dateTime hence get timezone by  datetime
     var duration = DateTime.now().timeZoneOffset;
-    if (duration.isNegative)
-      //TODO: convert duration to abs value instead of below params
-      return (date.toIso8601String() +
-          "-${duration.inHours.abs().toString().padLeft(2, '0')}:${(duration.inMinutes.abs() - (duration.inHours.abs() * 60)).toString().padLeft(2, '0')}");
-    else
-      return (date.toIso8601String() +
-          "+${duration.inHours.toString().padLeft(2, '0')}:${(duration.inMinutes - (duration.inHours * 60)).toString().padLeft(2, '0')}");
+
+    //TODO: convert duration to abs value instead of below params
+    return (date.toIso8601String() +
+        "${duration.isNegative ? '-' : '+'}${duration.inHours.abs().toString().padLeft(2, '0')}:${(duration.inMinutes.abs() - (duration.inHours.abs() * 60)).toString().padLeft(2, '0')}");
   }
 
   static DateTime parseIsoDate(String startTime) {
