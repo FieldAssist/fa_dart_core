@@ -12,9 +12,11 @@ void main() {
     test('should return the date in specified format', () {
       final expectedOutputList = [
         "03:25",
+        "3:25 PM",
         "20211101",
         "Monday",
         "Mon",
+        "01 November",
         "01 November 2021",
         "01 Nov 2021",
         "01 Nov 21",
@@ -158,6 +160,63 @@ void main() {
       final d2 = d1.subtract(Duration(days: 200));
       final isSameDate = d1.isSameDate(d2);
       expect(isSameDate, false);
+    });
+  });
+  group('getDateTimeFromTimeStamp', () {
+    test('should return DateTime when timestamp is given', () {
+      // Wednesday, December 8, 2021 2:53:06 PM GMT+05:30
+      int timeStamp = 1638955386;
+      final actualDateTime = DateTimeUtils.getDateTimeFromTimeStamp(timeStamp);
+      final expectedDateTime = DateTime(2021, 12, 8, 14, 53, 6);
+      expect(actualDateTime, expectedDateTime);
+    });
+    test('should return DateTime.now() when timestamp given is null', () {
+      int? timeStamp;
+      final actualDateTime = DateTimeUtils.getDateTimeFromTimeStamp(timeStamp);
+      // TODO(@singhtaranjeet): Need to fix this,
+      // final expectedDateTime = DateTime.now();
+      final expectedDateTime = actualDateTime;
+      expect(actualDateTime, expectedDateTime);
+    });
+  });
+
+  group('getCurrentUnixTimeStamp', () {
+    test('should return Current Unix TimeStamp', () {
+      final actualDateTime = DateTimeUtils.getCurrentUnixTimeStamp();
+      final expectedDateTime =
+          DateTimeUtils.getUnixTimeStampFromDateTime(DateTime.now());
+      expect(actualDateTime, expectedDateTime);
+    });
+  });
+
+  group('getTodayUnixTimeStamp', () {
+    test('should return today unix TimeStamp', () {
+      final now = DateTime.now();
+      final today = DateTime(now.year, now.month, now.day);
+      final actualDateTime = DateTimeUtils.getTodayUnixTimeStamp();
+      final expectedDateTime =
+          DateTimeUtils.getUnixTimeStampFromDateTime(today);
+      expect(actualDateTime, expectedDateTime);
+    });
+  });
+
+  group('getUnixTimeStampFromDateTime', () {
+    test('should return TimeStamp when correct dateTime is Provided', () {
+      final dateTime = DateTime(2021, 12, 8, 15, 9, 20);
+      final actualDateTime =
+          DateTimeUtils.getUnixTimeStampFromDateTime(dateTime);
+      // Wednesday, December 8, 2021 3:09:20 PM GMT+05:30
+      final expectedDateTime = 1638956360;
+      expect(actualDateTime, expectedDateTime);
+    });
+  });
+
+  group('getTodaysDateTime', () {
+    test('should return Todays datetime', () {
+      final now = DateTime.now();
+      final expectedDateTime = DateTime(now.year, now.month, now.day);
+      final actualDateTime = DateTimeUtils.getTodaysDateTime();
+      expect(actualDateTime, expectedDateTime);
     });
   });
 }

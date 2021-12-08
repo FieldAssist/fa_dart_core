@@ -9,9 +9,11 @@ import 'package:jiffy/jiffy.dart';
 
 enum DateTimeFormat {
   FORMAT_HH_MM,
+  FORMAT_H_MM_AM_PM,
   FORMAT_yyyyMMdd,
   FORMAT_day,
   FORMAT_day_short,
+  FORMAT_1_dd_MMMM,
   FORMAT_1_dd_MMMM_yyyy,
   FORMAT_1_dd_MMM_yyyy,
   FORMAT_1_dd_MMM_yy,
@@ -34,6 +36,8 @@ extension DateTimeFormatExtension on DateTimeFormat {
     switch (this) {
       case DateTimeFormat.FORMAT_HH_MM:
         return "hh:mm";
+      case DateTimeFormat.FORMAT_H_MM_AM_PM:
+        return "h:mm a";
       case DateTimeFormat.FORMAT_yyyyMMdd:
         return "yyyyMMdd";
       case DateTimeFormat.FORMAT_day:
@@ -48,6 +52,8 @@ extension DateTimeFormatExtension on DateTimeFormat {
         return "dd MMM yy";
       case DateTimeFormat.FORMAT_1_dd_MMM:
         return "dd MMM";
+      case DateTimeFormat.FORMAT_1_dd_MMMM:
+        return "dd MMMM";
       case DateTimeFormat.FORMAT_1_dd_MMMM_yyyy_HH_MM_AM_PM:
         return "dd MMMM yyyy hh:mm a";
       case DateTimeFormat.FORMAT_1_dd_MMM_yyyy_HH_MM_AM_PM:
@@ -96,7 +102,8 @@ class DateTimeUtils {
   static final format_Iso8601 = DateFormat("yyyy-MM-ddThh:mmZ");
 
   static String fromIso8601Format(String date) =>
-      DateFormat("dd/MM/yyyy hh:mm a").format(format_Iso8601.parse(date));
+      DateFormat(DateTimeFormat.FORMAT_3_dd_MM_yyyy_HH_MM_AM_PM.value)
+          .format(format_Iso8601.parse(date));
 
   static DateTime parseDatefromIso8601Format(String date) =>
       (format_Iso8601.parse(date));
@@ -127,6 +134,29 @@ class DateTimeUtils {
       now.month,
       now.day,
     );
+  }
+
+  static DateTime getDateTimeFromTimeStamp(int? timestamp) {
+    if (timestamp == null) {
+      return DateTime.now();
+    }
+    return DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
+  }
+
+  static int getCurrentUnixTimeStamp() =>
+      getUnixTimeStampFromDateTime(DateTime.now());
+
+  static int getTodayUnixTimeStamp() {
+    return getUnixTimeStampFromDateTime(getTodaysDateTime());
+  }
+
+  static int getUnixTimeStampFromDateTime(DateTime dateTime) {
+    return dateTime.toUtc().millisecondsSinceEpoch ~/ 1000;
+  }
+
+  static DateTime getTodaysDateTime() {
+    final now = DateTime.now();
+    return DateTime(now.year, now.month, now.day);
   }
 }
 
