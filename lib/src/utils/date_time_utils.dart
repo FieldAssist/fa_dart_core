@@ -9,6 +9,8 @@ import 'package:jiffy/jiffy.dart';
 
 enum DateTimeFormat {
   FORMAT_HH_MM,
+  FORMAT_KM,
+  FORMAT_JM,
   FORMAT_H_MM_AM_PM,
   FORMAT_yyyyMMdd,
   FORMAT_day,
@@ -24,6 +26,8 @@ enum DateTimeFormat {
   FORMAT_1_dd_MMMM_HH_MM_AM_PM,
   FORMAT_1_HH_MM_AM_PM,
   FORMAT_1_dd_MMM_yy_EEEE,
+  FORMAT_1_EEEE_dd_MMM_yyyy,
+  FORMAT_1_EEEEE_d_MMM_yyyy,
   FORMAT_2_yyyy_MM_dd,
   FORMAT_2_MM_dd_yyyy,
   FORMAT_3_dd_MM_yyyy,
@@ -36,6 +40,10 @@ extension DateTimeFormatExtension on DateTimeFormat {
     switch (this) {
       case DateTimeFormat.FORMAT_HH_MM:
         return "hh:mm";
+      case DateTimeFormat.FORMAT_KM:
+        return "km";
+      case DateTimeFormat.FORMAT_JM:
+        return "jm";
       case DateTimeFormat.FORMAT_H_MM_AM_PM:
         return "h:mm a";
       case DateTimeFormat.FORMAT_yyyyMMdd:
@@ -66,6 +74,10 @@ extension DateTimeFormatExtension on DateTimeFormat {
         return "hh:mm a";
       case DateTimeFormat.FORMAT_1_dd_MMM_yy_EEEE:
         return "dd MMM yy - EEEE";
+      case DateTimeFormat.FORMAT_1_EEEE_dd_MMM_yyyy:
+        return "EEEE, dd-MMM-yyyy";
+      case DateTimeFormat.FORMAT_1_EEEEE_d_MMM_yyyy:
+        return "EEEEE, d-MMM-yyyy";
       case DateTimeFormat.FORMAT_2_yyyy_MM_dd:
         return "yyyy-MM-dd";
       case DateTimeFormat.FORMAT_2_MM_dd_yyyy:
