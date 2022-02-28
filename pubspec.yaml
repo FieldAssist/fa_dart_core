@@ -12,15 +12,15 @@ environment:
   sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
-  rxdart: ^0.27.1
+  rxdart: ^0.27.3
   intl: ^0.17.0
-  jiffy: ^4.1.0
+  jiffy: ^5.0.0
 
   # Logger
   fa_dart_logger:
     git:
       url: https://github.com/FieldAssist/fa_dart_logger.git
-      ref: main
+      ref: main-upgrade
 
 dev_dependencies:
-  test: ^1.17.9
+  test: ^1.20.1
