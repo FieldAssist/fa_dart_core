@@ -1,7 +1,6 @@
 name: fa_dart_core
 description: Official FA Flutter core package.
 version: 2.0.0+2
-author: Ayush P Gupta <ayushpguptaapg@gmail.com>
 homepage: https://github.com/FieldAssist/fa_dart_core.git
 
 # The following line prevents the package from being accidentally published to

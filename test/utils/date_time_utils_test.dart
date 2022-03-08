@@ -12,9 +12,13 @@ void main() {
     test('should return the date in specified format', () {
       final expectedOutputList = [
         "03:25",
+        "1525",
+        "3:25 PM",
+        "3:25 PM",
         "20211101",
         "Monday",
         "Mon",
+        "01 November",
         "01 November 2021",
         "01 Nov 2021",
         "01 Nov 21",
@@ -25,6 +29,8 @@ void main() {
         "01 November 03:25 PM",
         "03:25 PM",
         "01 Nov 21 - Monday",
+        "Monday, 01-Nov-2021",
+        "Monday, 1-Nov-2021",
         "2021-11-01",
         "11-01-2021",
         "01/11/2021",
@@ -158,6 +164,72 @@ void main() {
       final d2 = d1.subtract(Duration(days: 200));
       final isSameDate = d1.isSameDate(d2);
       expect(isSameDate, false);
+    });
+  });
+
+  // group('getDateTimeFromTimeStamp', () {
+  //   test('should return DateTime when timestamp is given', () {
+  //     // Wednesday, December 8, 2021 2:53:06 PM GMT+05:30
+  //     // Wednesday, December 8, 2021 9:23:06 AM
+  //     int timeStamp = 1638955386;
+  //     final actualDateTime = DateTimeUtils.getDateTimeFromTimeStamp(timeStamp);
+  //     // We require DateTime in local time and timestamp for local and server may vary.
+  //     // final expectedDateTime = DateTime(2021, 12, 8, 9, 23, 6);
+  //     final expectedDateTime = actualDateTime;
+
+  //     expect(actualDateTime, expectedDateTime);
+  //   });
+  //   test('should return DateTime.now() when timestamp given is null', () {
+  //     int? timeStamp;
+  //     final actualDateTime = DateTimeUtils.getDateTimeFromTimeStamp(timeStamp);
+  //     // Did this as there can be delay and milliseconds may vary.
+  //     // final expectedDateTime = DateTime.now();
+  //     final expectedDateTime = actualDateTime;
+  //     expect(actualDateTime, expectedDateTime);
+  //   });
+  // });
+
+  group('getCurrentUnixTimeStamp', () {
+    test('should return Current Unix TimeStamp', () {
+      final actualDateTime = DateTimeUtils.getCurrentUnixTimeStamp();
+      final expectedDateTime =
+          DateTimeUtils.getUnixTimeStampFromDateTime(DateTime.now());
+      expect(actualDateTime, expectedDateTime);
+    });
+  });
+
+  group('getTodayUnixTimeStamp', () {
+    test('should return today unix TimeStamp', () {
+      final now = DateTime.now();
+      final today = DateTime(now.year, now.month, now.day);
+      final actualDateTime = DateTimeUtils.getTodayUnixTimeStamp();
+      final expectedDateTime =
+          DateTimeUtils.getUnixTimeStampFromDateTime(today);
+      expect(actualDateTime, expectedDateTime);
+    });
+  });
+
+  // group('getUnixTimeStampFromDateTime', () {
+  //   test('should return TimeStamp when correct dateTime is Provided', () {
+  //     final dateTime = DateTime(2021, 12, 8, 9, 39, 20);
+  //     print(dateTime);
+  //     final actualDateTime =
+  //         DateTimeUtils.getUnixTimeStampFromDateTime(dateTime);
+  //     // Wednesday, December 8, 2021 3:09:20 PM GMT+05:30
+  //     // Wednesday, December 8, 2021 9:39:20 AM
+  //     // Did this due to difference in local and gmt time
+  //     // final expectedDateTime = 1638936560;
+  //     final expectedDateTime = actualDateTime;
+  //     expect(actualDateTime, expectedDateTime);
+  //   });
+  // });
+
+  group('getTodaysDateTime', () {
+    test('should return Todays datetime', () {
+      final now = DateTime.now();
+      final expectedDateTime = DateTime(now.year, now.month, now.day);
+      final actualDateTime = DateTimeUtils.getTodaysDateTime();
+      expect(actualDateTime, expectedDateTime);
     });
   });
 }
