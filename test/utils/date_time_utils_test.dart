@@ -33,6 +33,8 @@ void main() {
         "Monday, 1-Nov-2021",
         "2021-11-01",
         "11-01-2021",
+        "Mon, 01-Nov-2021",
+        "Monday, 01-November-2021",
         "01/11/2021",
         "01/11/2021 03:25 PM",
         // dateTime.toIso8601String()
