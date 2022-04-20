@@ -119,9 +119,15 @@ class DateTimeUtils {
 
   static final format_Iso8601 = DateFormat("yyyy-MM-ddThh:mmZ");
 
-  static String fromIso8601Format(String date) =>
-      DateFormat(DateTimeFormat.FORMAT_3_dd_MM_yyyy_HH_MM_AM_PM.value)
-          .format(format_Iso8601.parse(date));
+  static String fromIso8601Format(String date, {DateTimeFormat? outputFormat}) {
+    if (outputFormat != null) {
+      return DateFormat(outputFormat.value)
+          .format(parseDatefromIso8601Format(date));
+    }
+
+    return DateFormat(DateTimeFormat.FORMAT_1_dd_MMMM_HH_MM_AM_PM.value)
+        .format(parseDatefromIso8601Format(date));
+  }
 
   static DateTime parseDatefromIso8601Format(String date) =>
       (format_Iso8601.parse(date));
@@ -175,6 +181,86 @@ class DateTimeUtils {
   static DateTime getTodaysDateTime() {
     final now = DateTime.now();
     return DateTime(now.year, now.month, now.day);
+  }
+
+  static String getTime(String date) {
+    var datetime = DateTime.parse(date).toLocal();
+    return DateFormat(DateTimeFormat.FORMAT_1_HH_MM_AM_PM.value)
+        .format(datetime);
+  }
+
+  static String getDay(DateTime date) {
+    return formatDateTime(
+      dateTime: date,
+      outputFormat: DateTimeFormat.FORMAT_day,
+    );
+  }
+
+  static String getDayShort(DateTime date) {
+    return formatDateTime(
+      dateTime: date,
+      outputFormat: DateTimeFormat.FORMAT_day_short,
+    );
+  }
+
+  static DateTime parsePlaningDate(String date) {
+    return DateTimeUtils.parseDateTime(
+      dateTime: date,
+      inputFormat: DateTimeFormat.FORMAT_3_dd_MM_yyyy,
+    );
+  }
+
+  static String formatPlaningDate(DateTime date) {
+    return DateTimeUtils.formatDateTime(
+      dateTime: date,
+      outputFormat: DateTimeFormat.FORMAT_3_dd_MM_yyyy,
+    );
+  }
+
+  static DateTime parseNewPlaningDate(String date) {
+    return DateTimeUtils.parseDateTime(
+      dateTime: date,
+      inputFormat: DateTimeFormat.FORMAT_2_yyyy_MM_dd,
+    );
+  }
+
+  static String formatNewPlaningDate(DateTime date) {
+    return DateTimeUtils.formatDateTime(
+      dateTime: date,
+      outputFormat: DateTimeFormat.FORMAT_2_yyyy_MM_dd,
+    );
+  }
+
+  static String formatRoutePlaningDate(DateTime date) {
+    return DateTimeUtils.formatDateTime(
+      dateTime: date,
+      outputFormat: DateTimeFormat.FORMAT_yyyyMMdd,
+    );
+  }
+
+  static DateTime parseRoutePlaningDate(String date) {
+    return DateTimeUtils.parseDateTime(
+      dateTime: date,
+      inputFormat: DateTimeFormat.FORMAT_yyyyMMdd,
+    );
+  }
+
+  static int? convertAnyDateToyyyyMMdd(String date) {
+    try {
+      return int.tryParse(
+        DateTimeUtils.formatDateTime(
+          dateTime: parsePlaningDate(date),
+          outputFormat: DateTimeFormat.FORMAT_yyyyMMdd,
+        ),
+      );
+    } catch (e, s) {
+      return int.tryParse(
+        DateTimeUtils.formatDateTime(
+          dateTime: parseIsoDate(date),
+          outputFormat: DateTimeFormat.FORMAT_yyyyMMdd,
+        ),
+      );
+    }
   }
 }
 
