@@ -203,46 +203,14 @@ class DateTimeUtils {
     );
   }
 
-  static DateTime parsePlaningDate(String date) {
-    return parseDateTime(
-      dateTime: date,
-      inputFormat: DateTimeFormat.FORMAT_3_dd_MM_yyyy,
-    );
-  }
-
-  static String formatPlaningDate(DateTime date) {
-    return formatDateTime(
-      dateTime: date,
-      outputFormat: DateTimeFormat.FORMAT_3_dd_MM_yyyy,
-    );
-  }
-
-  static DateTime parseNewPlaningDate(String date) {
-    return parseDateTime(
-      dateTime: date,
-      inputFormat: DateTimeFormat.FORMAT_2_yyyy_MM_dd,
-    );
-  }
-
-  static String formatNewPlaningDate(DateTime date) {
-    return formatDateTime(
-      dateTime: date,
-      outputFormat: DateTimeFormat.FORMAT_2_yyyy_MM_dd,
-    );
-  }
-
-  static String formatRoutePlaningDate(DateTime date) {
-    return formatDateTime(
-      dateTime: date,
-      outputFormat: DateTimeFormat.FORMAT_yyyyMMdd,
-    );
-  }
-
   static int? convertAnyDateToyyyyMMdd(String date) {
     try {
       return int.tryParse(
         formatDateTime(
-          dateTime: parsePlaningDate(date),
+          dateTime: parseDateTime(
+            dateTime: date,
+            inputFormat: DateTimeFormat.FORMAT_3_dd_MM_yyyy,
+          ),
           outputFormat: DateTimeFormat.FORMAT_yyyyMMdd,
         ),
       );
