@@ -234,4 +234,92 @@ void main() {
       expect(actualDateTime, expectedDateTime);
     });
   });
+
+  group('getTime', () {
+    test('should return time in HH:MM a format', () {
+      final expectedDateTime = "03:25 PM";
+      final actualDateTime = DateTimeUtils.getTime(dateTime.toString());
+      expect(actualDateTime, expectedDateTime);
+    });
+  });
+
+  group('getDay', () {
+    test('should return day', () {
+      final expectedDateTime = "Monday";
+      final actualDateTime = DateTimeUtils.getDay(dateTime);
+      expect(actualDateTime, expectedDateTime);
+    });
+  });
+
+  group('getDayShort', () {
+    test('should return day in short format like Mon,Tue', () {
+      final expectedDateTime = "Mon";
+      final actualDateTime = DateTimeUtils.getDayShort(dateTime);
+      expect(actualDateTime, expectedDateTime);
+    });
+  });
+
+  group('parsePlaningDate', () {
+    test('should parse the date and return dateTime', () {
+      final expectedDateTime = DateTime(2020, 02, 01);
+      final actualDateTime = DateTimeUtils.parsePlaningDate("01/02/2020");
+      expect(actualDateTime, expectedDateTime);
+    });
+
+    test('should throw exception when wrong format is provided', () {
+      expect(() => DateTimeUtils.parsePlaningDate("01-02-2020"),
+          throwsA(isA<FormatException>()));
+    });
+  });
+
+  group('formatPlaningDate', () {
+    test('should return date in dd/MM/yyyy format', () {
+      final expectedDateTime = "01/11/2021";
+      final actualDateTime = DateTimeUtils.formatPlaningDate(dateTime);
+      expect(actualDateTime, expectedDateTime);
+    });
+  });
+
+  group('parseNewPlaningDate', () {
+    test('should parse the DateTime and return dateTime', () {
+      final expectedDateTime = DateTime(2020, 02, 02);
+      final actualDateTime = DateTimeUtils.parseNewPlaningDate("2020-02-02");
+      expect(actualDateTime, expectedDateTime);
+    });
+
+    test('should throw exception when wrong format is provided', () {
+      expect(() => DateTimeUtils.parseNewPlaningDate("01/02/2020"),
+          throwsA(isA<FormatException>()));
+    });
+  });
+
+  group('formatNewPlaningDate', () {
+    test('should return date in dd-MM-yyyy format', () {
+      final expectedDateTime = "2021-11-01";
+      final actualDateTime = DateTimeUtils.formatNewPlaningDate(dateTime);
+      expect(actualDateTime, expectedDateTime);
+    });
+  });
+
+  group('formatRoutePlaningDate', () {
+    test('should return date in yyyyMMdd format', () {
+      final expectedDateTime = "20211101";
+      final actualDateTime = DateTimeUtils.formatRoutePlaningDate(dateTime);
+      expect(actualDateTime, expectedDateTime);
+    });
+  });
+
+  group('convertAnyDateToyyyyMMdd', () {
+    test('should return int in yyyyMMdd format', () {
+      final expectedDateTime = 20210101;
+      final actualDateTime = DateTimeUtils.convertAnyDateToyyyyMMdd("20210101");
+      expect(actualDateTime, expectedDateTime);
+    });
+
+    test('should return int in yyyyMMdd format', () {
+      final expectedDateTime = 20211101;
+      final actualDateTime = DateTimeUtils.convertAnyDateToyyyyMMdd("2021-11-01");
+      expect(actualDateTime, expectedDateTime);
+    });
+  });
 }

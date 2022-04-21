@@ -125,7 +125,7 @@ class DateTimeUtils {
           .format(parseDatefromIso8601Format(date));
     }
 
-    return DateFormat(DateTimeFormat.FORMAT_1_dd_MMMM_HH_MM_AM_PM.value)
+    return DateFormat(DateTimeFormat.FORMAT_3_dd_MM_yyyy_HH_MM_AM_PM.value)
         .format(parseDatefromIso8601Format(date));
   }
 
@@ -204,58 +204,51 @@ class DateTimeUtils {
   }
 
   static DateTime parsePlaningDate(String date) {
-    return DateTimeUtils.parseDateTime(
+    return parseDateTime(
       dateTime: date,
       inputFormat: DateTimeFormat.FORMAT_3_dd_MM_yyyy,
     );
   }
 
   static String formatPlaningDate(DateTime date) {
-    return DateTimeUtils.formatDateTime(
+    return formatDateTime(
       dateTime: date,
       outputFormat: DateTimeFormat.FORMAT_3_dd_MM_yyyy,
     );
   }
 
   static DateTime parseNewPlaningDate(String date) {
-    return DateTimeUtils.parseDateTime(
+    return parseDateTime(
       dateTime: date,
       inputFormat: DateTimeFormat.FORMAT_2_yyyy_MM_dd,
     );
   }
 
   static String formatNewPlaningDate(DateTime date) {
-    return DateTimeUtils.formatDateTime(
+    return formatDateTime(
       dateTime: date,
       outputFormat: DateTimeFormat.FORMAT_2_yyyy_MM_dd,
     );
   }
 
   static String formatRoutePlaningDate(DateTime date) {
-    return DateTimeUtils.formatDateTime(
+    return formatDateTime(
       dateTime: date,
       outputFormat: DateTimeFormat.FORMAT_yyyyMMdd,
-    );
-  }
-
-  static DateTime parseRoutePlaningDate(String date) {
-    return DateTimeUtils.parseDateTime(
-      dateTime: date,
-      inputFormat: DateTimeFormat.FORMAT_yyyyMMdd,
     );
   }
 
   static int? convertAnyDateToyyyyMMdd(String date) {
     try {
       return int.tryParse(
-        DateTimeUtils.formatDateTime(
+        formatDateTime(
           dateTime: parsePlaningDate(date),
           outputFormat: DateTimeFormat.FORMAT_yyyyMMdd,
         ),
       );
     } catch (e, s) {
       return int.tryParse(
-        DateTimeUtils.formatDateTime(
+        formatDateTime(
           dateTime: parseIsoDate(date),
           outputFormat: DateTimeFormat.FORMAT_yyyyMMdd,
         ),
