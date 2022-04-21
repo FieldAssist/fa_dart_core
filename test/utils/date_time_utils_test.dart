@@ -318,7 +318,8 @@ void main() {
 
     test('should return int in yyyyMMdd format', () {
       final expectedDateTime = 20211101;
-      final actualDateTime = DateTimeUtils.convertAnyDateToyyyyMMdd("2021-11-01");
+      final actualDateTime =
+          DateTimeUtils.convertAnyDateToyyyyMMdd("2021-11-01");
       expect(actualDateTime, expectedDateTime);
     });
   });
