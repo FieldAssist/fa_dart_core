@@ -33,6 +33,8 @@ void main() {
         "Monday, 1-Nov-2021",
         "2021-11-01",
         "11-01-2021",
+        "Mon, 01-Nov-2021",
+        "Monday, 01-November-2021",
         "01/11/2021",
         "01/11/2021 03:25 PM",
         // dateTime.toIso8601String()
@@ -107,6 +109,14 @@ void main() {
     test('should return DateTime from string date', () {
       final expected = Jiffy(dateTime.toIso8601String()).dateTime;
       final actual = DateTimeUtils.parseIsoDate(dateTime.toIso8601String());
+      expect(actual, expected);
+    });
+
+    test('should return the date from ISO8601 format', () {
+      final stringDate = dateTime.toIso8601String();
+      final expected = "01 November 2021 03:25 PM";
+      final actual = DateTimeUtils.fromIso8601Format(stringDate,
+          outputFormat: DateTimeFormat.FORMAT_1_dd_MMMM_yyyy_HH_MM_AM_PM);
       expect(actual, expected);
     });
   });
@@ -229,6 +239,45 @@ void main() {
       final now = DateTime.now();
       final expectedDateTime = DateTime(now.year, now.month, now.day);
       final actualDateTime = DateTimeUtils.getTodaysDateTime();
+      expect(actualDateTime, expectedDateTime);
+    });
+  });
+
+  group('getTime', () {
+    test('should return time in HH:MM a format', () {
+      final expectedDateTime = "03:25 PM";
+      final actualDateTime = DateTimeUtils.getTime(dateTime.toString());
+      expect(actualDateTime, expectedDateTime);
+    });
+  });
+
+  group('getDay', () {
+    test('should return day', () {
+      final expectedDateTime = "Monday";
+      final actualDateTime = DateTimeUtils.getDay(dateTime);
+      expect(actualDateTime, expectedDateTime);
+    });
+  });
+
+  group('getDayShort', () {
+    test('should return day in short format like Mon,Tue', () {
+      final expectedDateTime = "Mon";
+      final actualDateTime = DateTimeUtils.getDayShort(dateTime);
+      expect(actualDateTime, expectedDateTime);
+    });
+  });
+
+  group('convertAnyDateToyyyyMMdd', () {
+    test('should return int in yyyyMMdd format', () {
+      final expectedDateTime = 20210101;
+      final actualDateTime = DateTimeUtils.convertAnyDateToyyyyMMdd("20210101");
+      expect(actualDateTime, expectedDateTime);
+    });
+
+    test('should return int in yyyyMMdd format', () {
+      final expectedDateTime = 20211101;
+      final actualDateTime =
+          DateTimeUtils.convertAnyDateToyyyyMMdd("2021-11-01");
       expect(actualDateTime, expectedDateTime);
     });
   });

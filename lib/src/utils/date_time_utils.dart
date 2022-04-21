@@ -26,10 +26,12 @@ enum DateTimeFormat {
   FORMAT_1_dd_MMMM_HH_MM_AM_PM,
   FORMAT_1_HH_MM_AM_PM,
   FORMAT_1_dd_MMM_yy_EEEE,
-  FORMAT_1_EEEE_dd_MMM_yyyy,
-  FORMAT_1_EEEEE_d_MMM_yyyy,
+  FORMAT_2_EEEE_dd_MMM_yyyy,
+  FORMAT_2_EEEE_d_MMM_yyyy,
   FORMAT_2_yyyy_MM_dd,
   FORMAT_2_MM_dd_yyyy,
+  FORMAT_2_EEE_dd_MMM_yyyy,
+  FORMAT_2_EEEE_dd_MMMM_yyyy,
   FORMAT_3_dd_MM_yyyy,
   FORMAT_3_dd_MM_yyyy_HH_MM_AM_PM,
   FORMAT_UNKNOWN,
@@ -74,14 +76,18 @@ extension DateTimeFormatExtension on DateTimeFormat {
         return "hh:mm a";
       case DateTimeFormat.FORMAT_1_dd_MMM_yy_EEEE:
         return "dd MMM yy - EEEE";
-      case DateTimeFormat.FORMAT_1_EEEE_dd_MMM_yyyy:
+      case DateTimeFormat.FORMAT_2_EEEE_dd_MMM_yyyy:
         return "EEEE, dd-MMM-yyyy";
-      case DateTimeFormat.FORMAT_1_EEEEE_d_MMM_yyyy:
-        return "EEEEE, d-MMM-yyyy";
+      case DateTimeFormat.FORMAT_2_EEEE_d_MMM_yyyy:
+        return "EEEE, d-MMM-yyyy";
       case DateTimeFormat.FORMAT_2_yyyy_MM_dd:
         return "yyyy-MM-dd";
       case DateTimeFormat.FORMAT_2_MM_dd_yyyy:
         return "MM-dd-yyyy";
+      case DateTimeFormat.FORMAT_2_EEE_dd_MMM_yyyy:
+        return "EEE, dd-MMM-yyyy";
+      case DateTimeFormat.FORMAT_2_EEEE_dd_MMMM_yyyy:
+        return "EEEE, dd-MMMM-yyyy";
       case DateTimeFormat.FORMAT_3_dd_MM_yyyy:
         return "dd/MM/yyyy";
       case DateTimeFormat.FORMAT_3_dd_MM_yyyy_HH_MM_AM_PM:
@@ -113,9 +119,15 @@ class DateTimeUtils {
 
   static final format_Iso8601 = DateFormat("yyyy-MM-ddThh:mmZ");
 
-  static String fromIso8601Format(String date) =>
-      DateFormat(DateTimeFormat.FORMAT_3_dd_MM_yyyy_HH_MM_AM_PM.value)
-          .format(format_Iso8601.parse(date));
+  static String fromIso8601Format(String date, {DateTimeFormat? outputFormat}) {
+    if (outputFormat != null) {
+      return DateFormat(outputFormat.value)
+          .format(parseDatefromIso8601Format(date));
+    }
+
+    return DateFormat(DateTimeFormat.FORMAT_3_dd_MM_yyyy_HH_MM_AM_PM.value)
+        .format(parseDatefromIso8601Format(date));
+  }
 
   static DateTime parseDatefromIso8601Format(String date) =>
       (format_Iso8601.parse(date));
@@ -169,6 +181,47 @@ class DateTimeUtils {
   static DateTime getTodaysDateTime() {
     final now = DateTime.now();
     return DateTime(now.year, now.month, now.day);
+  }
+
+  static String getTime(String date) {
+    var datetime = DateTime.parse(date).toLocal();
+    return DateFormat(DateTimeFormat.FORMAT_1_HH_MM_AM_PM.value)
+        .format(datetime);
+  }
+
+  static String getDay(DateTime date) {
+    return formatDateTime(
+      dateTime: date,
+      outputFormat: DateTimeFormat.FORMAT_day,
+    );
+  }
+
+  static String getDayShort(DateTime date) {
+    return formatDateTime(
+      dateTime: date,
+      outputFormat: DateTimeFormat.FORMAT_day_short,
+    );
+  }
+
+  static int? convertAnyDateToyyyyMMdd(String date) {
+    try {
+      return int.tryParse(
+        formatDateTime(
+          dateTime: parseDateTime(
+            dateTime: date,
+            inputFormat: DateTimeFormat.FORMAT_3_dd_MM_yyyy,
+          ),
+          outputFormat: DateTimeFormat.FORMAT_yyyyMMdd,
+        ),
+      );
+    } catch (e, s) {
+      return int.tryParse(
+        formatDateTime(
+          dateTime: parseIsoDate(date),
+          outputFormat: DateTimeFormat.FORMAT_yyyyMMdd,
+        ),
+      );
+    }
   }
 }
 
