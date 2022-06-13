@@ -11,3 +11,7 @@ bool ifContainsKeyAndNotEmpty<T>(Map<String, T> map, String key) {
       map[key] != null &&
       map[key].toString().isNotEmpty;
 }
+
+bool isStringEmpty(String? value) => !checkIfNotEmpty(value);
+
+bool isListEmpty(List? value) => !checkIfListIsNotEmpty(value);

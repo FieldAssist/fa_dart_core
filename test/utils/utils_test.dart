@@ -74,4 +74,47 @@ void main() {
       expect(ifContainsKeyAndNotEmpty(map, 'abc'), true);
     });
   });
+
+  group('isStringEmpty', () {
+    test('isStringEmpty should return true when string is null', () {
+      final String? myString = null;
+      final result = isStringEmpty(myString);
+      expect(result, true);
+    });
+    test('isStringEmpty should return true when string is empty', () {
+      final String myString = '';
+      final result = isStringEmpty(myString);
+      expect(result, true);
+    });
+    test("isStringEmpty should return true when string is 'null'", () {
+      final String myString = 'null';
+      final result = isStringEmpty(myString);
+      expect(result, true);
+    });
+    test("isStringEmpty should return false when string is not null/empty", () {
+      final String myString = "Hello";
+      final result = isStringEmpty(myString);
+      expect(result, false);
+    });
+  });
+
+  group('isListEmpty', () {
+    test('isListEmpty should return true when the list is null', () {
+      final List? myList = null;
+      final result = isListEmpty(myList);
+      expect(result, true);
+    });
+
+    test('isListEmpty should return true when the list is empty', () {
+      final List myList = [];
+      final result = isListEmpty(myList);
+      expect(result, true);
+    });
+
+    test('isListEmpty should return false when the list is not null/empty', () {
+      final List<int> myList = <int>[1];
+      final result = isListEmpty(myList);
+      expect(result, false);
+    });
+  });
 }

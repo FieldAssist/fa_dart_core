@@ -214,7 +214,7 @@ class DateTimeUtils {
           outputFormat: DateTimeFormat.FORMAT_yyyyMMdd,
         ),
       );
-    } catch (e, s) {
+    } catch (e) {
       return int.tryParse(
         formatDateTime(
           dateTime: parseIsoDate(date),
