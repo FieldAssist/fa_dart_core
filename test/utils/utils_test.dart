@@ -117,4 +117,41 @@ void main() {
       expect(result, false);
     });
   });
+
+  group('formatValue', () {
+    test('value less than 1000, and isReturnTypeDouble false', () {
+      final value = 234.1;
+      final result = formatValue(value);
+      expect(result, '234');
+    });
+
+    test('value less than 1000, and isReturnTypeDouble true', () {
+      final value = 234.1;
+      final result = formatValue(value, isReturnTypeDouble: true);
+      expect(result, '234.10');
+    });
+    test('value greater than 1000, and isReturnTypeDouble false', () {
+      final value = 2341.1;
+      final result = formatValue(value);
+      expect(result, '2341');
+    });
+
+    test('value greater than 10000,', () {
+      final value = 23414.1;
+      final result = formatValue(value);
+      expect(result, '23.41K');
+    });
+
+    test('value greater than 100000, ', () {
+      final value = 234124.1;
+      final result = formatValue(value);
+      expect(result, '2.34L');
+    });
+
+    test('value greater than 1,00,00,000, ', () {
+      final value = 23421240.1;
+      final result = formatValue(value);
+      expect(result, '2.34Cr');
+    });
+  });
 }
