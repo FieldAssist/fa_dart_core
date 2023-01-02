@@ -22,21 +22,33 @@ bool isListEmpty(List? value) => !checkIfListIsNotEmpty(value);
 ///   34394941.23 is not easily readable, now it will returns this value as 3.44Cr
 ///   32421.32 will be returned as 32.42K
 ///   324936.21 will be returned as 3.25L
-String formatValue(double value, {bool isReturnTypeDouble = false}) {
-  if (value > 10000000) {
-    final calculated = value / 10000000;
-    return '${calculated.toStringAsFixed(2)}Cr';
-  } else if (value > 100000) {
-    final calculated = value / 100000;
-    return '${calculated.toStringAsFixed(2)}L';
-  } else if (value > 10000) {
-    final calculated = value / 1000;
-    return '${calculated.toStringAsFixed(2)}K';
-  } else {
-    if (isReturnTypeDouble) {
-      return value.toStringAsFixed(2);
+String formatValue(double value,
+    {int decimalPlaces = 0, String locale = 'en_IN'}) {
+  if (locale == 'en_IN') {
+    if (value > 10000000) {
+      final calculated = value / 10000000;
+      return '${calculated.toStringAsFixed(decimalPlaces)}Cr';
+    } else if (value > 100000) {
+      final calculated = value / 100000;
+      return '${calculated.toStringAsFixed(decimalPlaces)}L';
+    } else if (value > 10000) {
+      final calculated = value / 1000;
+      return '${calculated.toStringAsFixed(decimalPlaces)}K';
     } else {
-      return value.toInt().toString();
+      return value.toStringAsFixed(decimalPlaces);
+    }
+  } else {
+    if (value > 1000000000) {
+      final calculated = value / 1000000000;
+      return '${calculated.toStringAsFixed(decimalPlaces)}B';
+    } else if (value > 1000000) {
+      final calculated = value / 1000000;
+      return '${calculated.toStringAsFixed(decimalPlaces)}M';
+    } else if (value > 10000) {
+      final calculated = value / 1000;
+      return '${calculated.toStringAsFixed(decimalPlaces)}K';
+    } else {
+      return value.toStringAsFixed(decimalPlaces);
     }
   }
 }
