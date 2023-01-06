@@ -119,39 +119,91 @@ void main() {
   });
 
   group('formatValue', () {
-    test('value less than 1000, and isReturnTypeDouble false', () {
+    test('value less than 1000', () {
       final value = 234.1;
       final result = formatValue(value);
       expect(result, '234');
     });
 
-    test('value less than 1000, and isReturnTypeDouble true', () {
+    test('value less than 1000, decimalePlace: 2', () {
       final value = 234.1;
-      final result = formatValue(value, isReturnTypeDouble: true);
+      final result = formatValue(value, decimalPlaces: 2);
       expect(result, '234.10');
     });
-    test('value greater than 1000, and isReturnTypeDouble false', () {
+    test('value greater than 1000', () {
       final value = 2341.1;
       final result = formatValue(value);
       expect(result, '2341');
     });
 
-    test('value greater than 10000,', () {
+    test('value greater than 10000, locale: en_US', () {
       final value = 23414.1;
-      final result = formatValue(value);
+      final result = formatValue(value, decimalPlaces: 2, locale: 'en_US');
       expect(result, '23.41K');
     });
 
-    test('value greater than 100000, ', () {
+    test('value greater than 10000, locale: en_IN', () {
+      final value = 23414.1;
+      final result = formatValue(value, decimalPlaces: 2, locale: 'en_IN');
+      expect(result, '23.41K');
+    });
+
+    test('value greater than 100000, locale: en_IN', () {
       final value = 234124.1;
-      final result = formatValue(value);
+      final result = formatValue(value, decimalPlaces: 2, locale: 'en_IN');
       expect(result, '2.34L');
     });
 
-    test('value greater than 1,00,00,000, ', () {
+    test('value greater than 100000, locale: en_US, decimalPlaces: 2', () {
+      final value = 234124.1;
+      final result = formatValue(value, decimalPlaces: 2, locale: 'en_US');
+      expect(result, '234.12K');
+    });
+
+    test('value greater than 100000, locale: en_US, decimaPlace: 1', () {
+      final value = 234124.1;
+      final result = formatValue(value, decimalPlaces: 1, locale: 'en_US');
+      expect(result, '234.1K');
+    });
+
+    test('value greater than 1,00,00,000,  locale: en_IN, decimalPlace: 2', () {
+      final value = 23421240.1;
+      final result = formatValue(value, decimalPlaces: 2, locale: 'en_IN');
+      expect(result, '2.34Cr');
+    });
+
+    test('value greater than 1,00,00,000,', () {
       final value = 23421240.1;
       final result = formatValue(value);
-      expect(result, '2.34Cr');
+      expect(result, '2Cr');
+    });
+
+    test('value greater than 1,00,00,000, locale: en_US', () {
+      final value = 23421240.1;
+      final result = formatValue(value, decimalPlaces: 2, locale: 'en_US');
+      expect(result, '23.42M');
+    });
+  });
+
+  group('getCurrencySymbol', () {
+    test('for locale: en_US', () {
+      final result = getCurrencySymbol('en_US');
+      expect(result, '\$');
+    });
+    test('for locale: en_IN', () {
+      final result = getCurrencySymbol('en_IN');
+      expect(result, '₹');
+    });
+  });
+
+  group('getCurrencyName', () {
+    test('for locale: en_US', () {
+      final result = getCurrencyName('en_US');
+      expect(result, 'USD');
+    });
+    test('for locale: en_IN', () {
+      final result = getCurrencyName('en_IN');
+      expect(result, 'INR');
     });
   });
 }

@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 bool checkIfNotEmpty(String? value) {
   return value != null && value.isNotEmpty && value != "null";
 }
@@ -50,5 +52,23 @@ String formatValue(double value,
     } else {
       return value.toStringAsFixed(decimalPlaces);
     }
+  }
+}
+
+String getCurrencySymbol(String locale) {
+  try {
+    final format = NumberFormat.simpleCurrency(locale: locale);
+    return format.currencySymbol;
+  } catch (e) {
+    return '';
+  }
+}
+
+String getCurrencyName(String locale) {
+  try {
+    final format = NumberFormat.simpleCurrency(locale: locale);
+    return format.currencyName ?? '';
+  } catch (e) {
+    return '';
   }
 }
