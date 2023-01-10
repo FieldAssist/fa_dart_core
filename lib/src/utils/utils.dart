@@ -25,8 +25,12 @@ bool isListEmpty(List? value) => !checkIfListIsNotEmpty(value);
 ///   32421.32 will be returned as 32.42K
 ///   324936.21 will be returned as 3.25L
 String formatValue(double value,
-    {int decimalPlaces = 0, String locale = 'en_IN'}) {
+    {int decimalPlaces = 0, String locale = 'en_IN', bool isCompact = true}) {
   if (locale == 'en_IN') {
+    if (!isCompact) {
+      final formatter = NumberFormat("##,##,###.0#");
+      return formatter.format(value);
+    }
     if (value > 10000000) {
       final calculated = value / 10000000;
       return '${calculated.toStringAsFixed(decimalPlaces)}Cr';
@@ -40,6 +44,10 @@ String formatValue(double value,
       return value.toStringAsFixed(decimalPlaces);
     }
   } else {
+    if (!isCompact) {
+      final formatter = NumberFormat("###,###.0#");
+      return formatter.format(value);
+    }
     if (value > 1000000000) {
       final calculated = value / 1000000000;
       return '${calculated.toStringAsFixed(decimalPlaces)}B';
