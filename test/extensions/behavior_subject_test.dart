@@ -25,14 +25,14 @@ void main() {
       final subject = BehaviorSubject<int>.seeded(0);
       expect(subject, emits(0));
       subject.close();
-      subject.addErrorSafely(NullThrownError());
-      expect(subject, neverEmits(isA<NullThrownError>()));
+      subject.addErrorSafely(TypeError());
+      expect(subject, neverEmits(isA<TypeError>()));
     });
     test('addErrorSafely should add error if subject is not closed', () {
       final subject = BehaviorSubject<int>.seeded(0);
       expect(subject, emits(0));
-      subject.addErrorSafely(NullThrownError());
-      expect(subject, emitsError(isA<NullThrownError>()));
+      subject.addErrorSafely(TypeError());
+      expect(subject, emitsError(isA<TypeError>()));
     });
   });
 }
