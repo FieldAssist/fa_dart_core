@@ -1,10 +1,8 @@
 import 'package:fa_dart_core/fa_dart_core.dart';
-import 'package:intl/intl.dart';
 
-final pattern = NumberFormat('##,###.0#', 'en_US');
 const decimalPlace = 2;
 
-class NumberSystem {
+class NumberSystemUtils {
 
   String parse(bool usesInternationalNumberSystem, num? val, {int decimalPlaces = 0}) =>
       usesInternationalNumberSystem
