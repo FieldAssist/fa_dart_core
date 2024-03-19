@@ -3,8 +3,8 @@ import 'package:fa_dart_core/fa_dart_core.dart';
 const decimalPlace = 2;
 
 class NumberSystemUtils {
-
-  String parse(bool usesInternationalNumberSystem, num? val, {int decimalPlaces = 0}) =>
+  String parse(bool usesInternationalNumberSystem, num? val,
+          {int decimalPlaces = 0}) =>
       usesInternationalNumberSystem
           ? _parseAsInternational(val ?? 0, decimalPlaces: decimalPlaces)
           : _parseAsIndian(val ?? 0, decimalPlaces: decimalPlaces);
