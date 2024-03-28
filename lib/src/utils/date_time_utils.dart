@@ -157,7 +157,7 @@ class DateTimeUtils {
   }
 
   static DateTime parseIsoDate(String startTime) {
-    return Jiffy(startTime).dateTime;
+    return Jiffy.parse(startTime).dateTime;
   }
 
   static DateTime getAbsoluteDate() {

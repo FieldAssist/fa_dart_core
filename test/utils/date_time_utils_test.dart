@@ -107,7 +107,7 @@ void main() {
     });
 
     test('should return DateTime from string date', () {
-      final expected = Jiffy(dateTime.toIso8601String()).dateTime;
+      final expected = Jiffy.parse(dateTime.toIso8601String()).dateTime;
       final actual = DateTimeUtils.parseIsoDate(dateTime.toIso8601String());
       expect(actual, expected);
     });
