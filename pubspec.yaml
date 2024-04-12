@@ -13,7 +13,6 @@ environment:
 dependencies:
   rxdart: ^0.27.7
   intl: ^0.19.0
-  jiffy: ^6.3.0
 
   # Logger
   fa_dart_logger:

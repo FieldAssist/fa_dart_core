@@ -1,5 +1,4 @@
 import 'package:intl/intl.dart';
-import 'package:jiffy/jiffy.dart';
 
 /// format 1 -> ' ' (space)
 /// format 2 -> -
@@ -157,7 +156,7 @@ class DateTimeUtils {
   }
 
   static DateTime parseIsoDate(String startTime) {
-    return Jiffy.parse(startTime).dateTime;
+    return DateTime.parse(startTime).toLocal();
   }
 
   static DateTime getAbsoluteDate() {

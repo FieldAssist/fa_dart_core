@@ -1,6 +1,5 @@
 import 'package:fa_dart_core/src/utils/date_time_utils.dart';
 import 'package:intl/intl.dart';
-import 'package:jiffy/jiffy.dart';
 import 'package:test/expect.dart';
 import 'package:test/scaffolding.dart';
 
@@ -107,7 +106,7 @@ void main() {
     });
 
     test('should return DateTime from string date', () {
-      final expected = Jiffy.parse(dateTime.toIso8601String()).dateTime;
+      final expected = DateTime.parse(dateTime.toIso8601String());
       final actual = DateTimeUtils.parseIsoDate(dateTime.toIso8601String());
       expect(actual, expected);
     });
