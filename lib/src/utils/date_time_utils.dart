@@ -231,6 +231,10 @@ class DateTimeUtils {
       );
     }
   }
+
+  static int epochTime() {
+    return DateTime.now().millisecondsSinceEpoch ~/ 1000;
+  }
 }
 
 extension DateOnlyCompare on DateTime {
