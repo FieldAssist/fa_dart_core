@@ -26,10 +26,24 @@ bool isListEmpty(List? value) => !checkIfListIsNotEmpty(value);
 ///   324936.21 will be returned as 3.25L
 String formatValue(double value,
     {int decimalPlaces = 0, String locale = 'en_IN', bool isCompact = true}) {
+  String _getHashForDecimalPlaces(int decimalPlaces) {
+    var hash = "";
+    for (var x = 0; x < decimalPlaces - 1; x++) {
+      hash = hash + "#";
+    }
+    return hash;
+  }
+
   if (locale == 'en_IN') {
     if (!isCompact) {
-      final formatter = NumberFormat("##,##,###.0#");
-      return formatter.format(value);
+      if (decimalPlaces > 0) {
+        final formatter = NumberFormat(
+            "##,##,###.0${_getHashForDecimalPlaces(decimalPlaces)}");
+        return formatter.format(value);
+      } else {
+        final formatter = NumberFormat("##,##,###");
+        return formatter.format(value);
+      }
     }
     if (value > 10000000) {
       final calculated = value / 10000000;
@@ -45,8 +59,14 @@ String formatValue(double value,
     }
   } else {
     if (!isCompact) {
-      final formatter = NumberFormat("###,###.0#");
-      return formatter.format(value);
+      if (decimalPlaces > 0) {
+        final formatter = NumberFormat(
+            "##,##,###.0${_getHashForDecimalPlaces(decimalPlaces)}");
+        return formatter.format(value);
+      } else {
+        final formatter = NumberFormat("##,##,###");
+        return formatter.format(value);
+      }
     }
     if (value > 1000000000) {
       final calculated = value / 1000000000;
