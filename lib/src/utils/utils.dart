@@ -60,11 +60,11 @@ String formatValue(double value,
   } else {
     if (!isCompact) {
       if (decimalPlaces > 0) {
-        final formatter = NumberFormat(
-            "##,##,###.0${_getHashForDecimalPlaces(decimalPlaces)}");
+        final formatter =
+            NumberFormat("###,###.0${_getHashForDecimalPlaces(decimalPlaces)}");
         return formatter.format(value);
       } else {
-        final formatter = NumberFormat("##,##,###");
+        final formatter = NumberFormat("###,###");
         return formatter.format(value);
       }
     }
