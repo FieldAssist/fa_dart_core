@@ -2,7 +2,7 @@ import 'package:fa_dart_core/fa_dart_core.dart';
 
 class NumberSystemUtils {
   String parse(bool usesInternationalNumberSystem, num? val,
-          {int decimalPlaces = 0}) =>
+          {int decimalPlaces = 2}) =>
       usesInternationalNumberSystem
           ? _parseAsInternational(val ?? 0, decimalPlaces: decimalPlaces)
           : _parseAsIndian(val ?? 0, decimalPlaces: decimalPlaces);
