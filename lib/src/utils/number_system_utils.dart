@@ -1,10 +1,15 @@
 import 'package:fa_dart_core/fa_dart_core.dart';
 
 class NumberSystemUtils {
-  String parse(bool usesInternationalNumberSystem, num? val,
-          {int decimalPlaces = 2}) =>
+  String parse(
+    bool usesInternationalNumberSystem,
+    num? val, {
+    int decimalPlaces = 2,
+    int decimalPlacesForInternational = 1,
+  }) =>
       usesInternationalNumberSystem
-          ? _parseAsInternational(val ?? 0, decimalPlaces: decimalPlaces)
+          ? _parseAsInternational(val ?? 0,
+              decimalPlaces: decimalPlacesForInternational)
           : _parseAsIndian(val ?? 0, decimalPlaces: decimalPlaces);
 
   String _parseAsInternational(num val, {int decimalPlaces = 0}) {
