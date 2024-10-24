@@ -1,3 +1,4 @@
+import 'package:decimal/decimal.dart';
 import 'package:fa_dart_core/fa_dart_core.dart';
 
 class NumberSystemUtils {
@@ -36,5 +37,28 @@ class NumberSystemUtils {
       decimalPlaces: decimalPlaces,
       isCompact: isCompact,
     );
+  }
+
+  /// Dart doesn't support operator overloading for now.
+
+  num decimalPlus(num first, num second) => num.parse(
+      (Decimal.parse(first.toString()) + Decimal.parse(second.toString()))
+          .toString());
+
+  num decimalSubtract(num first, num second) => num.parse(
+      (Decimal.parse(first.toString()) - Decimal.parse(second.toString()))
+          .toString());
+
+  num decimalMultiply(num first, num second) => num.parse(
+      (Decimal.parse(first.toString()) * Decimal.parse(second.toString()))
+          .toString());
+
+  num decimalDivide(num first, num second) {
+    if (second == 0 || second == 1) {
+      return first;
+    }
+    return num.parse(
+        (Decimal.parse(first.toString()) / Decimal.parse(second.toString()))
+            .toString());
   }
 }
