@@ -36,6 +36,7 @@ enum DateTimeFormat {
   FORMAT_3_DD_MMM,
   FORMAT_3_dd_MM_yyyy,
   FORMAT_3_dd_MM_yyyy_HH_MM_AM_PM,
+  FORMAT_dd,
   FORMAT_UNKNOWN,
 }
 
@@ -100,6 +101,8 @@ extension DateTimeFormatExtension on DateTimeFormat {
         return "dd/MM/yyyy";
       case DateTimeFormat.FORMAT_3_dd_MM_yyyy_HH_MM_AM_PM:
         return "dd/MM/yyyy hh:mm a";
+      case DateTimeFormat.FORMAT_dd:
+        return "dd";
       default:
         throw Exception(
           'Unimplemented $this in extension DateTimeFormatExtension',
