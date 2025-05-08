@@ -70,10 +70,13 @@ String formatValue(double value,
     }
     if (value > 1000000000) {
       final calculated = value / 1000000000;
-      return '${calculated.toStringAsFixed(decimalPlaces)} B';
+      return '${calculated.toStringAsFixed(decimalPlaces)}B';
     } else if (value > 1000000) {
       final calculated = value / 1000000;
-      return '${calculated.toStringAsFixed(decimalPlaces)} M';
+      return '${calculated.toStringAsFixed(decimalPlaces)}M';
+    } else if (value > 10000) {
+      final calculated = value / 1000;
+      return '${calculated.toStringAsFixed(decimalPlaces)}K';
     } else {
       return value.toStringAsFixed(decimalPlaces);
     }
