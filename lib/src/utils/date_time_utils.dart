@@ -38,6 +38,7 @@ enum DateTimeFormat {
   FORMAT_3_DD_MMM,
   FORMAT_3_dd_MM_yyyy,
   FORMAT_3_dd_MM_yyyy_HH_MM_AM_PM,
+  FORMAT_dd,
   FORMAT_3_HH_MM_AM_PM_dd_MMM_yyyy,
   FORMAT_UNKNOWN,
 }
@@ -107,6 +108,8 @@ extension DateTimeFormatExtension on DateTimeFormat {
         return "dd/MM/yyyy";
       case DateTimeFormat.FORMAT_3_dd_MM_yyyy_HH_MM_AM_PM:
         return "dd/MM/yyyy hh:mm a";
+      case DateTimeFormat.FORMAT_dd:
+        return "dd";
       case DateTimeFormat.FORMAT_3_HH_MM_AM_PM_dd_MMM_yyyy:
         return "hh:mm aa, dd-MMM-yyyy";
       default:
@@ -144,11 +147,12 @@ class DateTimeUtils {
 
   static String fromIso8601Format(String date, {DateTimeFormat? outputFormat}) {
     if (outputFormat != null) {
-      return DateFormat(outputFormat.value,_locale)
+      return DateFormat(outputFormat.value, _locale)
           .format(parseDatefromIso8601Format(date));
     }
 
-    return DateFormat(DateTimeFormat.FORMAT_3_dd_MM_yyyy_HH_MM_AM_PM.value,_locale)
+    return DateFormat(
+            DateTimeFormat.FORMAT_3_dd_MM_yyyy_HH_MM_AM_PM.value, _locale)
         .format(parseDatefromIso8601Format(date));
   }
 
@@ -156,8 +160,9 @@ class DateTimeUtils {
       (format_Iso8601.parse(date));
 
   static String formatDSRDate(String date) {
-    return DateFormat(DateTimeFormat.FORMAT_1_dd_MMM_yy_EEEE.value,_locale).format(
-        DateFormat(DateTimeFormat.FORMAT_3_dd_MM_yyyy.value,_locale).parse(date));
+    return DateFormat(DateTimeFormat.FORMAT_1_dd_MMM_yy_EEEE.value, _locale)
+        .format(DateFormat(DateTimeFormat.FORMAT_3_dd_MM_yyyy.value, _locale)
+            .parse(date));
   }
 
   static String getCurrentISOTimeString({DateTime? dateTime}) {
@@ -173,8 +178,6 @@ class DateTimeUtils {
   static DateTime parseIsoDate(String startTime) {
     return DateTime.parse(startTime).toLocal();
   }
-
-
 
   static DateTime getAbsoluteDate() {
     final now = DateTime.now();
@@ -210,7 +213,7 @@ class DateTimeUtils {
 
   static String getTime(String date) {
     var datetime = DateTime.parse(date).toLocal();
-    return DateFormat(DateTimeFormat.FORMAT_1_HH_MM_AM_PM.value,_locale)
+    return DateFormat(DateTimeFormat.FORMAT_1_HH_MM_AM_PM.value, _locale)
         .format(datetime);
   }
 
@@ -254,9 +257,9 @@ class DateTimeUtils {
   }
 
   static String? toApiDateString(
-      DateTime? date,
-      ) {
-    if(date==null){
+    DateTime? date,
+  ) {
+    if (date == null) {
       return null;
     }
     return DateFormat(DateTimeFormat.FORMAT_2_MM_dd_yyyy.value).format(date);
@@ -270,17 +273,16 @@ class DateTimeUtils {
   }
 
   static String? isoUiDateString(
-      String? isoDate, {
-        DateTimeFormat format = DateTimeFormat.FORMAT_3_HH_MM_AM_PM_dd_MMM_yyyy,
-      }) =>
+    String? isoDate, {
+    DateTimeFormat format = DateTimeFormat.FORMAT_3_HH_MM_AM_PM_dd_MMM_yyyy,
+  }) =>
       formatDateTime(
-        dateTime:  isoToDateTime(isoDate),
+        dateTime: isoToDateTime(isoDate),
         outputFormat: format,
       );
 
   static String restrictFractionalSeconds(String dateTime) =>
       dateTime.replaceFirstMapped(RegExp('(\\.\\d{6})\\d+'), (m) => m[1]!);
-
 
   static List<DateTime> getInBetweenDates(String date1, String date2) {
     var startDate = isoToDateTime(date1);
@@ -295,7 +297,6 @@ class DateTimeUtils {
     }
     return dates.reversed.toList();
   }
-
 }
 
 extension DateOnlyCompare on DateTime {
