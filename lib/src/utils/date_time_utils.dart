@@ -114,7 +114,7 @@ extension DateTimeFormatExtension on DateTimeFormat {
         return "dd";
       case DateTimeFormat.FORMAT_MMM:
         return "MMM";
-      case DateTimeFormat.FORMAT_MMM_yyyy:
+      case DateTimeFormat.FORMAT_MMMM_yyyy:
         return "MMMM yyyy";
       case DateTimeFormat.FORMAT_3_HH_MM_AM_PM_dd_MMM_yyyy:
         return "hh:mm aa, dd-MMM-yyyy";
