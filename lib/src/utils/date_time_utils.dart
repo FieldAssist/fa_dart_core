@@ -40,6 +40,8 @@ enum DateTimeFormat {
   FORMAT_3_dd_MM_yyyy_HH_MM_AM_PM,
   FORMAT_dd,
   FORMAT_3_HH_MM_AM_PM_dd_MMM_yyyy,
+  FORMAT_MMM,
+  FORMAT_MMMM_yyyy,
   FORMAT_UNKNOWN,
 }
 
@@ -110,6 +112,10 @@ extension DateTimeFormatExtension on DateTimeFormat {
         return "dd/MM/yyyy hh:mm a";
       case DateTimeFormat.FORMAT_dd:
         return "dd";
+      case DateTimeFormat.FORMAT_MMM:
+        return "MMM";
+      case DateTimeFormat.FORMAT_MMM_yyyy:
+        return "MMMM yyyy";
       case DateTimeFormat.FORMAT_3_HH_MM_AM_PM_dd_MMM_yyyy:
         return "hh:mm aa, dd-MMM-yyyy";
       default:
