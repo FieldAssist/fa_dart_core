@@ -1,7 +1,7 @@
 import 'package:intl/intl.dart';
 
 bool checkIfNotEmpty(String? value) {
-  return value != null && value.isNotEmpty && value != "null";
+  return value != null && value.trim().isNotEmpty && value != "null";
 }
 
 bool checkIfListIsNotEmpty(List? list) {
@@ -11,7 +11,7 @@ bool checkIfListIsNotEmpty(List? list) {
 bool ifContainsKeyAndNotEmpty<T>(Map<String, T> map, String key) {
   return map.containsKey(key) &&
       map[key] != null &&
-      map[key].toString().isNotEmpty;
+      checkIfNotEmpty(map[key].toString());
 }
 
 bool isStringEmpty(String? value) => !checkIfNotEmpty(value);
