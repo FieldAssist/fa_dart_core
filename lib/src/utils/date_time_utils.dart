@@ -43,6 +43,13 @@ enum DateTimeFormat {
   FORMAT_MMM,
   FORMAT_MMMM_yyyy,
   FORMAT_UNKNOWN,
+  FORMAT_1_dd_MMMM_yyyy_HH_MM,
+  FORMAT_1_dd_MMM_yyyy_HH_MM,
+  FORMAT_1_dd_MMM_yy_HH_MM,
+  FORMAT_1_dd_MMMM_HH_MM,
+  FORMAT_1_HH_MM,
+  FORMAT_3_dd_MM_yyyy_HH_MM,
+  FORMAT_3_HH_MM_dd_MMM_yyyy,
 }
 
 extension DateTimeFormatExtension on DateTimeFormat {
@@ -118,6 +125,20 @@ extension DateTimeFormatExtension on DateTimeFormat {
         return "MMMM yyyy";
       case DateTimeFormat.FORMAT_3_HH_MM_AM_PM_dd_MMM_yyyy:
         return "hh:mm aa, dd-MMM-yyyy";
+      case DateTimeFormat.FORMAT_1_dd_MMMM_yyyy_HH_MM:
+        return "dd MMMM yyyy HH:mm";
+      case DateTimeFormat.FORMAT_1_dd_MMM_yyyy_HH_MM:
+        return "dd MMM yyyy HH:mm";
+      case DateTimeFormat.FORMAT_1_dd_MMM_yy_HH_MM:
+        return "dd MMM yy HH:mm";
+      case DateTimeFormat.FORMAT_1_dd_MMMM_HH_MM:
+        return "dd MMMM HH:mm";
+      case DateTimeFormat.FORMAT_1_HH_MM:
+        return "HH:mm";
+      case DateTimeFormat.FORMAT_3_dd_MM_yyyy_HH_MM:
+        return "dd/MM/yyyy HH:mm";
+      case DateTimeFormat.FORMAT_3_HH_MM_dd_MMM_yyyy:
+        return "HH:mm, dd-MMM-yyyy";
       default:
         throw Exception(
           'Unimplemented $this in extension DateTimeFormatExtension',
