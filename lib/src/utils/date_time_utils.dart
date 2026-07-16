@@ -324,7 +324,27 @@ class DateTimeUtils {
     }
     return dates.reversed.toList();
   }
+
+  /// Formats raw seconds into MM:SS or HH:MM:SS format.
+  /// If [timeStr] is already formatted (e.g. "01:23") or invalid, it returns the original string.
+  static String formatTimeFromSeconds(String? timeStr) {
+    if (timeStr == null || timeStr.isEmpty) {
+      return '00:00';
+    }
+    final parsedSeconds = int.tryParse(timeStr);
+    if (parsedSeconds == null) {
+      return timeStr;
+    }
+    final duration = Duration(seconds: parsedSeconds);
+    final minutes = duration.inMinutes.remainder(60);
+    final s = duration.inSeconds.remainder(60);
+    final seconds = "${s < 10 ? '0' : ''}$s";
+    final h = duration.inHours;
+    final hours = h > 0 ? "$h:" : "";
+    return "$hours${minutes < 10 && h > 0 ? '0' : ''}$minutes:$seconds";
+  }
 }
+
 
 extension DateOnlyCompare on DateTime {
   bool isSameDate(DateTime other) {
