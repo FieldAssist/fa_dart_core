@@ -674,8 +674,7 @@ final _mimeMaps = <String, String>{
       'application/vnd.openxmlformats-officedocument.presentationml.slideshow',
   'ppt': 'application/vnd.ms-powerpoint',
   'pptm': 'application/vnd.ms-powerpoint.presentation.macroenabled.12',
-  'pptx':
-      'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+  'pptx': 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
   'pqa': 'application/vnd.palm',
   'prc': 'application/x-mobipocket-ebook',
   'pre': 'application/vnd.lotus-freelance',
@@ -1064,5 +1063,5 @@ final _mimeMaps = <String, String>{
   'zip': 'application/zip',
   'zir': 'application/vnd.zul',
   'zirz': 'application/vnd.zul',
-  'zmm': 'application/vnd.handheld-entertainment+xml'
+  'zmm': 'application/vnd.handheld-entertainment+xml',
 };

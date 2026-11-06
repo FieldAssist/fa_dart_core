@@ -174,22 +174,28 @@ class DateTimeUtils {
 
   static String fromIso8601Format(String date, {DateTimeFormat? outputFormat}) {
     if (outputFormat != null) {
-      return DateFormat(outputFormat.value, _locale)
-          .format(parseDatefromIso8601Format(date));
+      return DateFormat(
+        outputFormat.value,
+        _locale,
+      ).format(parseDatefromIso8601Format(date));
     }
 
     return DateFormat(
-            DateTimeFormat.FORMAT_3_dd_MM_yyyy_HH_MM_AM_PM.value, _locale)
-        .format(parseDatefromIso8601Format(date));
+      DateTimeFormat.FORMAT_3_dd_MM_yyyy_HH_MM_AM_PM.value,
+      _locale,
+    ).format(parseDatefromIso8601Format(date));
   }
 
   static DateTime parseDatefromIso8601Format(String date) =>
       (format_Iso8601.parse(date));
 
   static String formatDSRDate(String date) {
-    return DateFormat(DateTimeFormat.FORMAT_1_dd_MMM_yy_EEEE.value, _locale)
-        .format(DateFormat(DateTimeFormat.FORMAT_3_dd_MM_yyyy.value, _locale)
-            .parse(date));
+    return DateFormat(
+      DateTimeFormat.FORMAT_1_dd_MMM_yy_EEEE.value,
+      _locale,
+    ).format(
+      DateFormat(DateTimeFormat.FORMAT_3_dd_MM_yyyy.value, _locale).parse(date),
+    );
   }
 
   static String getCurrentISOTimeString({DateTime? dateTime}) {
@@ -208,11 +214,7 @@ class DateTimeUtils {
 
   static DateTime getAbsoluteDate() {
     final now = DateTime.now();
-    return DateTime(
-      now.year,
-      now.month,
-      now.day,
-    );
+    return DateTime(now.year, now.month, now.day);
   }
 
   static DateTime getDateTimeFromTimeStamp(int? timestamp) {
@@ -240,8 +242,10 @@ class DateTimeUtils {
 
   static String getTime(String date) {
     var datetime = DateTime.parse(date).toLocal();
-    return DateFormat(DateTimeFormat.FORMAT_1_HH_MM_AM_PM.value, _locale)
-        .format(datetime);
+    return DateFormat(
+      DateTimeFormat.FORMAT_1_HH_MM_AM_PM.value,
+      _locale,
+    ).format(datetime);
   }
 
   static String getDay(DateTime date) {
@@ -283,9 +287,7 @@ class DateTimeUtils {
     return DateTime.now().millisecondsSinceEpoch ~/ 1000;
   }
 
-  static String? toApiDateString(
-    DateTime? date,
-  ) {
+  static String? toApiDateString(DateTime? date) {
     if (date == null) {
       return null;
     }
@@ -302,11 +304,7 @@ class DateTimeUtils {
   static String? isoUiDateString(
     String? isoDate, {
     DateTimeFormat format = DateTimeFormat.FORMAT_3_HH_MM_AM_PM_dd_MMM_yyyy,
-  }) =>
-      formatDateTime(
-        dateTime: isoToDateTime(isoDate),
-        outputFormat: format,
-      );
+  }) => formatDateTime(dateTime: isoToDateTime(isoDate), outputFormat: format);
 
   static String restrictFractionalSeconds(String dateTime) =>
       dateTime.replaceFirstMapped(RegExp('(\\.\\d{6})\\d+'), (m) => m[1]!);
@@ -344,7 +342,6 @@ class DateTimeUtils {
     return "$hours${minutes < 10 && h > 0 ? '0' : ''}$minutes:$seconds";
   }
 }
-
 
 extension DateOnlyCompare on DateTime {
   bool isSameDate(DateTime other) {
