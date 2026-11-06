@@ -24,8 +24,12 @@ bool isListEmpty(List? value) => !checkIfListIsNotEmpty(value);
 ///   34394941.23 is not easily readable, now it will returns this value as 3.44Cr
 ///   32421.32 will be returned as 32.42K
 ///   324936.21 will be returned as 3.25L
-String formatValue(double value,
-    {int decimalPlaces = 0, String locale = 'en_IN', bool isCompact = true}) {
+String formatValue(
+  double value, {
+  int decimalPlaces = 0,
+  String locale = 'en_IN',
+  bool isCompact = true,
+}) {
   String _getHashForDecimalPlaces(int decimalPlaces) {
     var hash = "";
     for (var x = 0; x < decimalPlaces - 1; x++) {
@@ -38,7 +42,8 @@ String formatValue(double value,
     if (!isCompact) {
       if (decimalPlaces > 0) {
         final formatter = NumberFormat(
-            "##,##,###.0${_getHashForDecimalPlaces(decimalPlaces)}");
+          "##,##,###.0${_getHashForDecimalPlaces(decimalPlaces)}",
+        );
         return formatter.format(value);
       } else {
         final formatter = NumberFormat("##,##,###");
@@ -60,8 +65,9 @@ String formatValue(double value,
   } else {
     if (!isCompact) {
       if (decimalPlaces > 0) {
-        final formatter =
-            NumberFormat("###,###.0${_getHashForDecimalPlaces(decimalPlaces)}");
+        final formatter = NumberFormat(
+          "###,###.0${_getHashForDecimalPlaces(decimalPlaces)}",
+        );
         return formatter.format(value);
       } else {
         final formatter = NumberFormat("###,###");

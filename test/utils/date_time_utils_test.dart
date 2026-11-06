@@ -43,10 +43,12 @@ void main() {
 
       try {
         outputFormatList.forEach((outputFormat) {
-          actualOutputList.add(DateTimeUtils.formatDateTime(
-            dateTime: dateTime,
-            outputFormat: outputFormat,
-          ));
+          actualOutputList.add(
+            DateTimeUtils.formatDateTime(
+              dateTime: dateTime,
+              outputFormat: outputFormat,
+            ),
+          );
         });
 
         expect(actualOutputList, expectedOutputList);
@@ -75,17 +77,21 @@ void main() {
   group('parseDateTime', () {
     final date = "01 Nov 2021";
     test('should parse and return the date in expected format', () {
-      final expected =
-          DateFormat(DateTimeFormat.FORMAT_1_dd_MMM_yyyy.value).parse(date);
+      final expected = DateFormat(DateTimeFormat.FORMAT_1_dd_MMM_yyyy.value)
+          .parse(date);
       final actual = DateTimeUtils.parseDateTime(
-          dateTime: date, inputFormat: DateTimeFormat.FORMAT_1_dd_MMM_yyyy);
+        dateTime: date,
+        inputFormat: DateTimeFormat.FORMAT_1_dd_MMM_yyyy,
+      );
       expect(actual, expected);
     });
 
     test('should throw exception when wrong input format provided', () {
       expect(
         () => DateTimeUtils.parseDateTime(
-            dateTime: date, inputFormat: DateTimeFormat.FORMAT_3_dd_MM_yyyy),
+          dateTime: date,
+          inputFormat: DateTimeFormat.FORMAT_3_dd_MM_yyyy,
+        ),
         throwsA(isA<FormatException>()),
       );
     });
@@ -114,16 +120,16 @@ void main() {
     test('should return the date from ISO8601 format', () {
       final stringDate = dateTime.toIso8601String();
       final expected = "01 November 2021 03:25 PM";
-      final actual = DateTimeUtils.fromIso8601Format(stringDate,
-          outputFormat: DateTimeFormat.FORMAT_1_dd_MMMM_yyyy_HH_MM_AM_PM);
+      final actual = DateTimeUtils.fromIso8601Format(
+        stringDate,
+        outputFormat: DateTimeFormat.FORMAT_1_dd_MMMM_yyyy_HH_MM_AM_PM,
+      );
       expect(actual, expected);
     });
   });
 
   group('getAbsoluteDate', () {
-    test(
-        'getAbsoluteDate should return DateTime containing only year month and date',
-        () {
+    test('getAbsoluteDate should return DateTime containing only year month and date', () {
       final now = DateTime.now();
       final expected = DateTime(now.year, now.month, now.day);
       final actual = DateTimeUtils.getAbsoluteDate();
@@ -132,41 +138,49 @@ void main() {
   });
 
   group('getCurrentISOTimeString', () {
-    test('should parse and return iso time string of the provided dateTime',
-        () {
-      final actual = DateTimeUtils.getCurrentISOTimeString(dateTime: dateTime);
-      expect(actual, isA<String>());
-      expect(
-        actual,
-        matches(
-          RegExp(
-            r'[0-9]{4}-[0-9]{2}-[0-9]{2}T([0-9]{2}:){2}[0-9]{2}.[0-9]+[+|-][0-9]{2}:[0-9]{2}',
+    test(
+      'should parse and return iso time string of the provided dateTime',
+      () {
+        final actual = DateTimeUtils.getCurrentISOTimeString(
+          dateTime: dateTime,
+        );
+        expect(actual, isA<String>());
+        expect(
+          actual,
+          matches(
+            RegExp(
+              r'[0-9]{4}-[0-9]{2}-[0-9]{2}T([0-9]{2}:){2}[0-9]{2}.[0-9]+[+|-][0-9]{2}:[0-9]{2}',
+            ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
 
-    test('should parse and return iso time string when dateTime not supplied',
-        () {
-      final actual = DateTimeUtils.getCurrentISOTimeString();
-      expect(actual, isA<String>());
-      expect(
-        actual,
-        matches(
-          RegExp(
-            r'[0-9]{4}-[0-9]{2}-[0-9]{2}T([0-9]{2}:){2}[0-9]{2}.[0-9]+[+|-][0-9]{2}:[0-9]{2}',
+    test(
+      'should parse and return iso time string when dateTime not supplied',
+      () {
+        final actual = DateTimeUtils.getCurrentISOTimeString();
+        expect(actual, isA<String>());
+        expect(
+          actual,
+          matches(
+            RegExp(
+              r'[0-9]{4}-[0-9]{2}-[0-9]{2}T([0-9]{2}:){2}[0-9]{2}.[0-9]+[+|-][0-9]{2}:[0-9]{2}',
+            ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
   });
 
   group('isSameDay', () {
-    test('This method should return true for same date as both the inputs.',
-        () {
-      final isSameDate = DateTime.now().isSameDate(DateTime.now());
-      expect(isSameDate, true);
-    });
+    test(
+      'This method should return true for same date as both the inputs.',
+      () {
+        final isSameDate = DateTime.now().isSameDate(DateTime.now());
+        expect(isSameDate, true);
+      },
+    );
 
     test('This method should return false for different dates as input.', () {
       final d1 = DateTime.now();
@@ -201,8 +215,9 @@ void main() {
   group('getCurrentUnixTimeStamp', () {
     test('should return Current Unix TimeStamp', () {
       final actualDateTime = DateTimeUtils.getCurrentUnixTimeStamp();
-      final expectedDateTime =
-          DateTimeUtils.getUnixTimeStampFromDateTime(DateTime.now());
+      final expectedDateTime = DateTimeUtils.getUnixTimeStampFromDateTime(
+        DateTime.now(),
+      );
       expect(actualDateTime, expectedDateTime);
     });
   });
@@ -212,8 +227,9 @@ void main() {
       final now = DateTime.now();
       final today = DateTime(now.year, now.month, now.day);
       final actualDateTime = DateTimeUtils.getTodayUnixTimeStamp();
-      final expectedDateTime =
-          DateTimeUtils.getUnixTimeStampFromDateTime(today);
+      final expectedDateTime = DateTimeUtils.getUnixTimeStampFromDateTime(
+        today,
+      );
       expect(actualDateTime, expectedDateTime);
     });
   });
@@ -275,8 +291,9 @@ void main() {
 
     test('should return int in yyyyMMdd format', () {
       final expectedDateTime = 20211101;
-      final actualDateTime =
-          DateTimeUtils.convertAnyDateToyyyyMMdd("2021-11-01");
+      final actualDateTime = DateTimeUtils.convertAnyDateToyyyyMMdd(
+        "2021-11-01",
+      );
       expect(actualDateTime, expectedDateTime);
     });
   });

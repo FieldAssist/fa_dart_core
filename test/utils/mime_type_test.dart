@@ -34,11 +34,13 @@ void main() {
       expect(mimeType, "application/pdf");
     });
 
-    test('mimeFromExtension should return null when unknown extension found',
-        () {
-      final path = "apg";
-      final mimeType = mime(path);
-      expect(mimeType, null);
-    });
+    test(
+      'mimeFromExtension should return null when unknown extension found',
+      () {
+        final path = "apg";
+        final mimeType = mime(path);
+        expect(mimeType, null);
+      },
+    );
   });
 }
